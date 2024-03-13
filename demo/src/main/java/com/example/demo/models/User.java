@@ -12,8 +12,7 @@ import java.util.ArrayList;
 @Document(collection = "users")
 public class User {
 
-    @Field(name = "_id")
-    @MongoId(FieldType.STRING)
+    @Field(name = "username")
     private String username;
 
     @Field(name = "password")

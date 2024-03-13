@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface SpecificationRepository extends MongoRepository<Specification, ObjectId> {
+    void deleteById(String specId);
 
 //    String getFileLocation(Specification specification);
 //

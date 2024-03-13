@@ -10,7 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ParsedDataRepository extends MongoRepository<ParsedData, ObjectId> {
 
-//    Optional<ParsedData> createParsedData(ParsedData parsedData);
-//
-//    Optional<ParsedData> deleteParsedDataById(ObjectId id);
+
 }
