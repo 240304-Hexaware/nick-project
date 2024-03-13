@@ -9,14 +9,11 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.ArrayList;
 
-@Document("users")
+@Document(collection = "users")
 public class User {
 
     @Field(name = "_id")
-    @MongoId(FieldType.OBJECT_ID)
-    private String id;
-
-    @Field(name = "username")
+    @MongoId(FieldType.STRING)
     private String username;
 
     @Field(name = "password")
@@ -25,18 +22,29 @@ public class User {
     @Field(name = "permissions")
     private String permissions;
 
-    @Field("files_uploaded")
+    @Field(name = "files_uploaded")
     private ArrayList<String> filesUploaded;
 
-    @Field("specifications")
+    @Field(name = "specifications")
     private ArrayList<String> specifications;
 
     public User(){
 
     }
 
-    public User(String id, String username, String password, String permissions, ArrayList<String> filesUploaded, ArrayList<String> specifications) {
-        this.id = id;
+    public User(String username, String password, String permissions) {
+        this.username = username;
+        this.password = password;
+        this.permissions = permissions;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.permissions = "user";
+    }
+
+    public User( String username, String password, String permissions, ArrayList<String> filesUploaded, ArrayList<String> specifications) {
         this.username = username;
         this.password = password;
         this.permissions = permissions;
