@@ -1,11 +1,10 @@
 package com.example.demo.services;
 
-import com.example.demo.models.File;
+import com.example.demo.models.ReadFile;
 import com.example.demo.repositories.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,12 +17,12 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public List<File> findAllFilesByFileName(String fileName){
+    public List<ReadFile> findAllFilesByFileName(String fileName){
         return fileRepository.findAllFileByFileName(fileName);
     }
 
-    public File createNewFile(File newFile) {
-        return fileRepository.save(newFile);
+    public ReadFile createNewFile(ReadFile newReadFile) {
+        return fileRepository.save(newReadFile);
     }
 
     public void deleteFile(String fileName) {

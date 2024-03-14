@@ -1,5 +1,7 @@
 package com.example.demo.repositories;
 
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.repository.Update;
 import org.springframework.stereotype.Repository;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,7 +15,9 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     Optional<User> findByUsernameAndPassword(String username, String password);
 
-//    Optional<User> updatePermissions(String username, String permissions);
+    @Query("{'username': {'$eq': ?0}}")
+    @Update("{'$set': {'permissions' : ?1}}")
+    void updatePermissionsByUsername(String username, String permissions);
 
 
 }

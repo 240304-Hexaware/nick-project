@@ -4,12 +4,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import org.bson.types.ObjectId;
 
 import java.util.Date;
 
 @Document("files")
-public class File {
+public class ReadFile {
 
     @Field(name = "_id")
     @MongoId(FieldType.STRING)
@@ -39,11 +38,11 @@ public class File {
     @Field(name = "uploader")
     private String uploader;
 
-    public File(){
+    public ReadFile(){
 
     }
 
-    public File(String fileName, String specId, Date uploadDate, int fileSize, String filePath, ParsedData parsedData, String uploader) {
+    public ReadFile(String fileName, String specId, Date uploadDate, int fileSize, String filePath, ParsedData parsedData, String uploader) {
         this.fileName = fileName;
         this.specId = specId;
         this.uploadDate = uploadDate;

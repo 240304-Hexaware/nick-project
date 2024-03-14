@@ -34,11 +34,11 @@ public class UserController {
         return userService.findByUsernameAndPassword(username, password);
     }
 
-//    @PutMapping("/users")
-//    @ResponseStatus(HttpStatus.OK)
-//    public User updatePermissions(@RequestParam("username") String username, @RequestParam("permissions") String permissions) throws Exception {
-//        return userService.updatePermissions(username, permissions);
-//    }
+    @PutMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public void putNewPermissionsByUsername(@RequestParam("username") String username, @RequestParam("permissions") String permissions) throws Exception {
+        userService.updatePermissionsByUsername(username, permissions);
+    }
 
     @DeleteMapping("/users")
     @ResponseStatus(HttpStatus.ACCEPTED)

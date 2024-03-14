@@ -25,9 +25,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-//    public User updatePermissions(String username, String permissions) throws Exception {
-//        return userRepository.updatePermissions(username, permissions).orElseThrow(() -> new Exception("User's permissions could not be updated"));
-//    }
+    public void updatePermissionsByUsername(String username, String permissions) throws Exception {
+        userRepository.updatePermissionsByUsername(username, permissions);
+    }
 
     public void deleteUser(String username) throws Exception{
         userRepository.deleteById(username);
