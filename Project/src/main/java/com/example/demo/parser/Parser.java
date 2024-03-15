@@ -2,14 +2,14 @@ package com.example.demo.parser;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bson.BsonDocument;
+import org.bson.BsonString;
+import org.bson.json.JsonObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 //TODO adapt the parser to build json representations of the flat files rather than list<string>
@@ -59,6 +59,21 @@ public class Parser {
             System.out.println("[" + fieldName + "][" + fieldValue + "]");
         }
         return fieldList;
+    }
+
+    public BsonDocument readStringFieldsBson(String data, Map<String, Field> spec) throws IOException {
+
+        BsonDocument finalBson = new BsonDocument();
+
+        Set<String> fields = spec.keySet();
+        for(String fieldName : fields){
+            Field field = spec.get(fieldName);
+            String fieldValue = data.substring(field.getStartPos(), field.getEndPos()+1).trim();
+
+            finalBson.put(fieldName, new BsonString(fieldValue));
+        }
+
+        return finalBson;
     }
 
     public static Map<String, Field> parseSpec(File specFile) throws IOException {

@@ -6,6 +6,9 @@ public class Field {
     private String name;
     private String dataType;
 
+    public Field() {
+    }
+
     public Field(int startPos, int endPos, String name, String dataType) {
         this.startPos = startPos;
         this.endPos = endPos;
