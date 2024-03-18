@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.util.*;
 
 
-//TODO adapt the parser to build json representations of the flat files rather than list<string>
+
 public class Parser {
 
     /**

@@ -20,7 +20,7 @@ public class ParsedData {
 
     }
 
-    public ParsedData(String id, String jsonConversion) {
+    public ParsedData(String jsonConversion) {
         this.id = id;
         this.jsonConversion = jsonConversion;
     }

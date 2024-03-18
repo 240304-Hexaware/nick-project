@@ -27,13 +27,13 @@ public class ReadFile {
     private Date uploadDate;
 
     @Field(name = "file_size")
-    private int fileSize;
+    private long fileSize;
 
     @Field(name = "file_path")
     private String filePath;
 
     @Field(name = "parsed_data")
-    private ParsedData parsedData;
+    private String parsedData;
 
     @Field(name = "uploader")
     private String uploader;
@@ -42,7 +42,7 @@ public class ReadFile {
 
     }
 
-    public ReadFile(String fileName, String specId, Date uploadDate, int fileSize, String filePath, ParsedData parsedData, String uploader) {
+    public ReadFile(String fileName, String specId, Date uploadDate, long fileSize, String filePath, String parsedData, String uploader) {
         this.fileName = fileName;
         this.specId = specId;
         this.uploadDate = uploadDate;
@@ -76,11 +76,11 @@ public class ReadFile {
         this.uploadDate = uploadDate;
     }
 
-    public int getFileSize() {
+    public long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(int fileSize) {
+    public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
 
@@ -92,11 +92,11 @@ public class ReadFile {
         this.filePath = filePath;
     }
 
-    public ParsedData getParsedData() {
+    public String getParsedData() {
         return parsedData;
     }
 
-    public void setParsedData(ParsedData parsedData) {
+    public void setParsedData(String parsedData) {
         this.parsedData = parsedData;
     }
 

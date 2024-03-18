@@ -24,10 +24,9 @@ public class Specification {
 
     }
 
-    public Specification(String originalJson, String filePath, String id) {
+    public Specification(String originalJson, String filePath) {
         this.originalJson = originalJson;
         this.filePath = filePath;
-        this.id = id;
     }
 
     public String getFilePath() {
