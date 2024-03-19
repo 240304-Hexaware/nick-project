@@ -14,6 +14,8 @@ public interface FileRepository extends MongoRepository<ReadFile, ObjectId> {
 
     void deleteByFileName(String fileName);
 
+    //List<ReadFile> findAllById(List<String> fileIds);
+
 //    Optional<File> createFile(File file);
 //
 //    Optional<File> deleteFileById(ObjectId id);

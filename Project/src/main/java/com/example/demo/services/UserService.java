@@ -3,9 +3,12 @@ package com.example.demo.services;
 import com.example.demo.exceptions.ItemNotFoundException;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -33,4 +36,7 @@ public class UserService {
         userRepository.deleteById(username);
     }
 
+    public List<User> getAllUsers() throws ItemNotFoundException {
+        return userRepository.findAll();
+    }
 }

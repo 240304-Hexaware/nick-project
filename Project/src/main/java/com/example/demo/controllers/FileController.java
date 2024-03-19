@@ -24,6 +24,12 @@ public class FileController {
         return fileService.findAllFilesByFileName(fileName);
     }
 
+//    @GetMapping("/files")
+//    @ResponseStatus(HttpStatus.FOUND)
+//    public List<ReadFile> getAllFilesByIds(@RequestBody List<String> fileIds){
+//        return fileService.findAllFilesById(fileIds);
+//    }
+
     @PostMapping("/files")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ReadFile postNewFIle(@RequestBody ReadFile newReadFile){

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -32,6 +34,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.FOUND)
     public User getUserByUsernameAndPassword(@RequestParam("username") String username, @RequestParam("password") String password) throws ItemNotFoundException {
         return userService.findByUsernameAndPassword(username, password);
+    }
+
+    @GetMapping("/users/all")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<User> getAllUsers() throws ItemNotFoundException {
+        return userService.getAllUsers();
     }
 
     @PutMapping("/users")

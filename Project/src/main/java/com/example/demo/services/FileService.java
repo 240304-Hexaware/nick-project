@@ -28,4 +28,8 @@ public class FileService {
     public void deleteFile(String fileName) {
         fileRepository.deleteByFileName(fileName);
     }
+
+//    public List<ReadFile> findAllFilesById(List<String> fileIds) {
+//        return fileRepository.findAllById(fileIds);
+//    }
 }
