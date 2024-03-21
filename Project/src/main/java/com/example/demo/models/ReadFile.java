@@ -44,7 +44,7 @@ public class ReadFile {
 
     public ReadFile(String fileName, String specId, Date uploadDate, long fileSize, String filePath, String parsedData, String uploader) {
         this.fileName = fileName;
-        this.specId = specId;
+        this.specName = specId;
         this.uploadDate = uploadDate;
         this.fileSize = fileSize;
         this.filePath = filePath;
@@ -61,11 +61,11 @@ public class ReadFile {
     }
 
     public String getSpecId() {
-        return specId;
+        return specName;
     }
 
     public void setSpecId(String specId) {
-        this.specId = specId;
+        this.specName = specId;
     }
 
     public Date getUploadDate() {
