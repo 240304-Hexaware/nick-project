@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 public class SpecificationController {
 
     private SpecificationService specificationService;
@@ -23,6 +24,12 @@ public class SpecificationController {
     @ResponseStatus(HttpStatus.OK)
     public List<Specification> getAllSpecifications(){
         return specificationService.getAllSpecs();
+    }
+
+    @GetMapping("/spec/name")
+    @ResponseStatus(HttpStatus.FOUND)
+    public Specification getSpecificationBySpecName(@RequestParam("specName") String specName){
+        return null; //TODO Finish this
     }
 
     @DeleteMapping("/spec")

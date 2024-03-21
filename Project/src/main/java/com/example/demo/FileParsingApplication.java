@@ -33,41 +33,41 @@ public class FileParsingApplication {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		ApplicationContext ctx = SpringApplication.run(FileParsingApplication.class, args);
 
-		File specFile = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//car.json");
-		Parser parser = new Parser();
-		Map<String, Field> map = parser.parseSpec(specFile);
-
-		File flatFile = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//flatfile");
-
-
-		String data = parser.readAllBytes(flatFile);
-
-		List<String> list  = parser.readStringFields(data, map);
-
-		BsonDocument bison = parser.readStringFieldsBson(data, map);
-
-		String specJson = parser.readCompleteChars(specFile);
-
-		Specification specToUpload =  new Specification(specJson, specFile.getPath());
-
-		SpecificationRepository specRepo = ctx.getBean(SpecificationRepository.class);
-
-		FileRepository fileRepo = ctx.getBean(FileRepository.class);
-
-		Specification newSpec = new Specification(specJson, specFile.getPath());
-
-		specRepo.save(newSpec);
-
-		List<Specification> savedSpec = specRepo.findAll();
-
-		ReadFile newFile = new ReadFile(flatFile.getName(), savedSpec.get(0).getId(), new Date(), flatFile.getTotalSpace(), flatFile.getPath(), bison.toString(), "nick");
-
-		fileRepo.save(newFile);
-
-		System.out.println(specJson);
-		System.out.println(bison);
-		System.out.println(data);
-		System.out.println(list);
+////		File specFile = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//car.json");
+////		Parser parser = new Parser();
+////		Map<String, Field> map = parser.parseSpec(specFile);
+////
+////		File flatFile = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//flatfile");
+////
+////
+////		String data = parser.readAllBytes(flatFile);
+////
+////		List<String> list  = parser.readStringFields(data, map);
+////
+////		BsonDocument bison = parser.readStringFieldsBson(data, map);
+////
+////		String specJson = parser.readCompleteChars(specFile);
+////
+////		Specification specToUpload =  new Specification(specJson, specFile.getPath());
+////
+////		SpecificationRepository specRepo = ctx.getBean(SpecificationRepository.class);
+////
+////		FileRepository fileRepo = ctx.getBean(FileRepository.class);
+////
+////		Specification newSpec = new Specification(specJson, specFile.getPath());
+////
+////		specRepo.save(newSpec);
+////
+////		List<Specification> savedSpec = specRepo.findAll();
+////
+////		ReadFile newFile = new ReadFile(flatFile.getName(), savedSpec.get(0).getId(), new Date(), flatFile.getTotalSpace(), flatFile.getPath(), bison.toString(), "nick");
+////
+////		fileRepo.save(newFile);
+////
+////		System.out.println(specJson);
+////		System.out.println(bison);
+////		System.out.println(data);
+////		System.out.println(list);
 	}
 
 }

@@ -16,6 +16,9 @@ public class Specification {
     @Field(name = "file_path")
     private String filePath;
 
+    @Field(name="spec_name")
+    private String specName;
+
     @Field(name = "_id")
     @MongoId(FieldType.OBJECT_ID)
     private String id;

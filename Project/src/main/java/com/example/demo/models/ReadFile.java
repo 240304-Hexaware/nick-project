@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -11,8 +12,7 @@ import java.util.Date;
 public class ReadFile {
 
     @Field(name = "_id")
-    @MongoId(FieldType.STRING)
-    private String id;
+    private ObjectId id;
 
 //    @Field(name = "metadata")
 //    private Metadata metadata;
@@ -21,7 +21,7 @@ public class ReadFile {
     private String fileName;
 
     @Field(name = "spec_id")
-    private String specId;
+    private String specName;
 
     @Field(name = "upload_date")
     private Date uploadDate;

@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.models.ReadFile;
 import com.example.demo.repositories.FileRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class FileService {
         fileRepository.deleteByFileName(fileName);
     }
 
-//    public List<ReadFile> findAllFilesById(List<String> fileIds) {
-//        return fileRepository.findAllById(fileIds);
-//    }
+    public List<ReadFile> findAllFilesById(List<ObjectId> fileIds) {
+        return fileRepository.findAllById(fileIds);
+    }
 }
