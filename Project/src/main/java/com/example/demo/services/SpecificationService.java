@@ -22,6 +22,14 @@ public class SpecificationService {
         return specificationRepository.findAll();
     }
 
+    public List<Specification> getSpecByName(String specName) {
+        return specificationRepository.findSpecificationsBySpecName(specName);
+    }
+
+    public Specification postNewSpec(Specification spec) {
+        return specificationRepository.save(spec);
+    }
+
     public void deleteSpecification(ObjectId specId) {
         specificationRepository.deleteById(specId);
     }

@@ -58,13 +58,10 @@ public class FileController {
         }
         System.out.println(builder.toString());
 
-        File uploaded = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//Flatfiles//"+newFile.getName());
+        File uploaded = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//Flatfiles//"+newFile.getOriginalFilename());
         FileWriter writer = new FileWriter(uploaded);
         writer.append(builder.toString());
         writer.close();
-
-        //TODO get spec by specname, parse uploaded by spec, post new ReadFile with parse and spec etc.
-        //TODO in SpecController create spec upload
 
         File spec = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//Specs//"+specName);
 
