@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 public class SpecificationController {
 
     private SpecificationService specificationService;

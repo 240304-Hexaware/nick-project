@@ -18,7 +18,7 @@ public class Specification {
 
     @Field(name="spec_name")
     private String specName;
-
+    //TODO all ids back to objectid
     @Field(name = "_id")
     @MongoId(FieldType.OBJECT_ID)
     private String id;
