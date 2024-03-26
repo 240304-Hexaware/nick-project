@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
+import com.example.demo.exceptions.ItemNotFoundException;
 import com.example.demo.models.Specification;
 import com.example.demo.services.SpecificationService;
+import com.example.demo.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,14 +22,16 @@ import java.util.List;
 public class SpecificationController {
 
     private SpecificationService specificationService;
+    private UserService userService;
 
     @Autowired
-    public SpecificationController(SpecificationService specificationService) {
+    public SpecificationController(SpecificationService specificationService, UserService userService) {
         this.specificationService = specificationService;
+        this.userService = userService;
     }
 
     @GetMapping("/spec")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<Specification> getAllSpecifications(){
         return specificationService.getAllSpecs();
     }
@@ -37,9 +42,20 @@ public class SpecificationController {
         return specificationService.getSpecByName(specName);
     }
 
+    @GetMapping("/spec/id")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Specification> getAllSpecsByIds(@RequestParam("ids") List<String> specIds){
+        List<ObjectId> objectIds = new ArrayList<ObjectId>();
+        for(String id : specIds){
+            ObjectId curr = new ObjectId(id);
+            objectIds.add(curr);
+        }
+        return specificationService.findAllSpecsById(objectIds);
+    }
+
     @PostMapping("/spec")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Specification uploadSpec(@RequestParam("spec")MultipartFile newSpec) throws IOException {
+    public Specification uploadSpec(@RequestParam("spec")MultipartFile newSpec, @RequestParam("username") String uploader) throws IOException, ItemNotFoundException {
         InputStreamReader reader = new InputStreamReader(newSpec.getInputStream());
         StringBuilder builder = new StringBuilder();
         while(reader.ready()) {
@@ -51,7 +67,13 @@ public class SpecificationController {
         writer.append(builder.toString());
         writer.close();
 
-        return specificationService.postNewSpec(new Specification(builder.toString(), specFile.getPath()));
+        Specification newUpload = specificationService.postNewSpec(new Specification(builder.toString(), specFile.getPath(), specFile.getName()));
+
+        ObjectId id =  this.getSpecificationBySpecName(specFile.getName()).getFirst().getId();
+
+        this.userService.updateSpecificationsByUsername(uploader, id);
+
+        return newUpload;
     }
 
     @DeleteMapping("/spec")

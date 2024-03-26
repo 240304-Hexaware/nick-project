@@ -22,10 +22,10 @@ public class User {
     private String permissions;
 
     @Field(name = "files_uploaded")
-    private ArrayList<String> filesUploaded;
+    private ArrayList<ObjectId> filesUploaded;
 
     @Field(name = "specifications")
-    private ArrayList<String> specifications;
+    private ArrayList<ObjectId> specifications;
 
     public User(){
 
@@ -43,7 +43,7 @@ public class User {
         this.permissions = "user";
     }
 
-    public User( String username, String password, String permissions, ArrayList<String> filesUploaded, ArrayList<String> specifications) {
+    public User( String username, String password, String permissions, ArrayList<ObjectId> filesUploaded, ArrayList<ObjectId> specifications) {
         this.username = username;
         this.password = password;
         this.permissions = permissions;
@@ -51,19 +51,19 @@ public class User {
         this.specifications = specifications;
     }
 
-    public void setFilesUploaded(ArrayList<String> filesUploaded) {
+    public void setFilesUploaded(ArrayList<ObjectId> filesUploaded) {
         this.filesUploaded = filesUploaded;
     }
 
-    public ArrayList<String> getFilesUploaded() {
+    public ArrayList<ObjectId> getFilesUploaded() {
         return filesUploaded;
     }
 
-    public void setSpecifications(ArrayList<String> specifications) {
+    public void setSpecifications(ArrayList<ObjectId> specifications) {
         this.specifications = specifications;
     }
 
-    public ArrayList<String> getSpecifications() {
+    public ArrayList<ObjectId> getSpecifications() {
         return specifications;
     }
 

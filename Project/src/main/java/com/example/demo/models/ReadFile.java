@@ -64,6 +64,8 @@ public class ReadFile {
         return specName;
     }
 
+    public ObjectId getId(){return id;}
+
     public void setSpecId(String specId) {
         this.specName = specId;
     }

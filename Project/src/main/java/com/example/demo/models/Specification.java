@@ -20,16 +20,16 @@ public class Specification {
     private String specName;
     //TODO all ids back to objectid
     @Field(name = "_id")
-    @MongoId(FieldType.OBJECT_ID)
-    private String id;
+    private ObjectId id;
 
     public Specification(){
 
     }
 
-    public Specification(String originalJson, String filePath) {
+    public Specification(String originalJson, String filePath, String specName) {
         this.originalJson = originalJson;
         this.filePath = filePath;
+        this.specName = specName;
     }
 
     public String getFilePath() {
@@ -40,11 +40,11 @@ public class Specification {
         this.filePath = filePath;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

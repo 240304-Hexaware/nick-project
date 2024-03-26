@@ -1,9 +1,12 @@
 package com.example.demo.controllers;
 
+import com.example.demo.exceptions.ItemNotFoundException;
 import com.example.demo.models.ReadFile;
+import com.example.demo.models.User;
 import com.example.demo.parser.Field;
 import com.example.demo.parser.Parser;
 import com.example.demo.services.FileService;
+import com.example.demo.services.UserService;
 import org.bson.BsonDocument;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,22 +28,29 @@ import java.util.Map;
 public class FileController {
 
     private FileService fileService;
+    private UserService userService;
 
     @Autowired
-    public FileController(FileService fileService) {
+    public FileController(FileService fileService, UserService userService) {
         this.fileService = fileService;
+        this.userService = userService;
     }
 
     @GetMapping("/files")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public List<ReadFile> getAllFilesByName(@RequestParam("filename") String fileName){
         return fileService.findAllFilesByFileName(fileName);
     }
 
     @GetMapping("/files/id")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ReadFile> getAllFilesByIds(@RequestBody List<ObjectId> fileIds){
-        return fileService.findAllFilesById(fileIds);
+    public List<ReadFile> getAllFilesByIds(@RequestParam("ids") List<String> fileIds){
+        List<ObjectId> objectIds = new ArrayList<ObjectId>();
+        for(String id : fileIds){
+            ObjectId curr = new ObjectId(id);
+            objectIds.add(curr);
+        }
+        return fileService.findAllFilesById(objectIds);
     }
 
     @PostMapping("/files")
@@ -50,7 +61,7 @@ public class FileController {
 
     @PostMapping("/files/upload")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String uploadFile(@RequestParam("file") MultipartFile newFile, @RequestParam("spec") String specName, @RequestParam("user") String userName) throws IOException {
+    public String uploadFile(@RequestParam("file") MultipartFile newFile, @RequestParam("spec") String specName, @RequestParam("user") String userName) throws IOException, ItemNotFoundException {
         InputStreamReader reader = new InputStreamReader(newFile.getInputStream());
         StringBuilder builder = new StringBuilder();
         while(reader.ready()) {
@@ -73,12 +84,15 @@ public class FileController {
 
         ReadFile readFile = new ReadFile(newFile.getName(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bison.toString(), userName);
 
-        fileService.createNewFile(readFile);
+        ReadFile newFileWId = fileService.createNewFile(readFile);
+
+        this.userService.updateFilesUploadedByUsername(userName, newFileWId.getId());
+
 
         return bison.toString();
     }
 
-    @DeleteMapping("files")
+    @DeleteMapping("/files")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteFile(@RequestParam("filename") String fileName){
         fileService.deleteFile(fileName);

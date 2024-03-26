@@ -33,4 +33,8 @@ public class SpecificationService {
     public void deleteSpecification(ObjectId specId) {
         specificationRepository.deleteById(specId);
     }
+
+    public List<Specification> findAllSpecsById(List<ObjectId> objectIds) {
+        return specificationRepository.findAllById(objectIds);
+    }
 }
