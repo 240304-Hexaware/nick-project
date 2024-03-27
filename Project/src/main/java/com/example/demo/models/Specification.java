@@ -55,4 +55,8 @@ public class Specification {
     public void setOriginalJson(String originalJson) {
         this.originalJson = originalJson;
     }
+
+    public void setSpecName(String specName) { this.specName = specName; }
+
+    public String getSpecName() { return this.specName; }
 }

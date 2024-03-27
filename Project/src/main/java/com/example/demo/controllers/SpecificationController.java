@@ -45,6 +45,7 @@ public class SpecificationController {
     @GetMapping("/spec/id")
     @ResponseStatus(HttpStatus.FOUND)
     public List<Specification> getAllSpecsByIds(@RequestParam("ids") List<String> specIds){
+
         List<ObjectId> objectIds = new ArrayList<ObjectId>();
         for(String id : specIds){
             ObjectId curr = new ObjectId(id);
