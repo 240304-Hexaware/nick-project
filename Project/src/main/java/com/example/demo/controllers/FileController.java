@@ -36,7 +36,7 @@ public class FileController {
         this.userService = userService;
     }
 
-    @GetMapping("/files")
+    @GetMapping("/files/name")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<ReadFile> getAllFilesByName(@RequestParam("filename") String fileName){
         return fileService.findAllFilesByFileName(fileName);
@@ -44,13 +44,19 @@ public class FileController {
 
     @GetMapping("/files/id")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ReadFile> getAllFilesByIds(@RequestParam("ids") List<String> fileIds){
+    public List<ReadFile> getAllFilesByIds(@RequestParam("ids") String[] fileIds){
         List<ObjectId> objectIds = new ArrayList<ObjectId>();
         for(String id : fileIds){
             ObjectId curr = new ObjectId(id);
             objectIds.add(curr);
         }
         return fileService.findAllFilesById(objectIds);
+    }
+
+    @GetMapping("/files")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<ReadFile> getAllFiles(){
+        return fileService.findAllFiles();
     }
 
     @PostMapping("/files")
@@ -82,7 +88,7 @@ public class FileController {
         String data = parser.readAllBytes(uploaded);
         BsonDocument bison = parser.readStringFieldsBson(data, map);
 
-        ReadFile readFile = new ReadFile(newFile.getName(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bison.toString(), userName);
+        ReadFile readFile = new ReadFile(newFile.getOriginalFilename(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bison.toString(), userName);
 
         ReadFile newFileWId = fileService.createNewFile(readFile);
 

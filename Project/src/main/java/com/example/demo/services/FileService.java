@@ -33,4 +33,8 @@ public class FileService {
     public List<ReadFile> findAllFilesById(List<ObjectId> fileIds) {
         return fileRepository.findAllById(fileIds);
     }
+
+    public List<ReadFile> findAllFiles() {
+        return fileRepository.findAll();
+    }
 }
