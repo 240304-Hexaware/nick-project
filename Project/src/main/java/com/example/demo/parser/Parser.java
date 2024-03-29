@@ -61,17 +61,33 @@ public class Parser {
         return fieldList;
     }
 
-    public BsonDocument readStringFieldsBson(String data, Map<String, Field> spec) throws IOException {
+    public List<String> readStringFieldsBson(String data, Map<String, Field> spec) throws IOException {
 
-        BsonDocument finalBson = new BsonDocument();
+        List<String> finalBson = new ArrayList<String>();
+        BsonDocument currBson = new BsonDocument();
 
-        Set<String> fields = spec.keySet();
-        for(String fieldName : fields){
-            Field field = spec.get(fieldName);
-            String fieldValue = data.substring(field.getStartPos(), field.getEndPos()+1).trim();
+        Set<String> fieldNames = spec.keySet();
+        final int[] endPos = {0};
+        spec.values().forEach((field) -> {
+            if(field.getEndPos() > endPos[0]){
+                endPos[0] = field.getEndPos();
+            }
+        });
 
-            finalBson.put(fieldName, new BsonString(fieldValue));
+        int dataCount = (data.length()-1) / endPos[0];
+
+        for(int i = 0; i < dataCount; i++){
+            for(String fieldName : fieldNames){
+                Field field = spec.get(fieldName);
+                String fieldValue = data.substring(field.getStartPos()+(i* endPos[0]), field.getEndPos()+1+(i* endPos[0])).trim();
+
+                currBson.put(fieldName, new BsonString(fieldValue));
+            }
+            System.out.println(currBson);
+            finalBson.add(currBson.toString());
+            currBson.clear();
         }
+
 
         return finalBson;
     }

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface FileRepository extends MongoRepository<ReadFile, ObjectId> {
 
-    List<ReadFile> findAllFileByFileName(String fileName);
+    ReadFile findReadFileByFileName(String fileName);
 
     void deleteByFileName(String fileName);
 

@@ -18,8 +18,8 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public List<ReadFile> findAllFilesByFileName(String fileName){
-        return fileRepository.findAllFileByFileName(fileName);
+    public ReadFile findAllFilesByFileName(String fileName){
+        return fileRepository.findReadFileByFileName(fileName);
     }
 
     public ReadFile createNewFile(ReadFile newReadFile) {

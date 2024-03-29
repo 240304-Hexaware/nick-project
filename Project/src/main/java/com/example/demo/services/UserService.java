@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class UserService {
             filesUploaded = new ArrayList<ObjectId>();
         }
         filesUploaded.add(newUpload);
+
         userRepository.updateFilesUploadedByUsername(username, filesUploaded);
     }
 

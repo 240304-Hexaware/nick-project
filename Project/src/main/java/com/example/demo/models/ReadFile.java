@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
+import java.util.List;
 
 @Document("files")
 public class ReadFile {
@@ -33,7 +34,7 @@ public class ReadFile {
     private String filePath;
 
     @Field(name = "parsed_data")
-    private String parsedData;
+    private List<String> parsedData;
 
     @Field(name = "uploader")
     private String uploader;
@@ -42,7 +43,7 @@ public class ReadFile {
 
     }
 
-    public ReadFile(String fileName, String specId, Date uploadDate, long fileSize, String filePath, String parsedData, String uploader) {
+    public ReadFile(String fileName, String specId, Date uploadDate, long fileSize, String filePath, List<String> parsedData, String uploader) {
         this.fileName = fileName;
         this.specName = specId;
         this.uploadDate = uploadDate;
@@ -65,6 +66,8 @@ public class ReadFile {
     }
 
     public ObjectId getId(){return id;}
+
+    public void setId(ObjectId id){this.id = id;}
 
     public void setSpecId(String specId) {
         this.specName = specId;
@@ -94,11 +97,11 @@ public class ReadFile {
         this.filePath = filePath;
     }
 
-    public String getParsedData() {
+    public List<String> getParsedData() {
         return parsedData;
     }
 
-    public void setParsedData(String parsedData) {
+    public void setParsedData(List<String> parsedData) {
         this.parsedData = parsedData;
     }
 

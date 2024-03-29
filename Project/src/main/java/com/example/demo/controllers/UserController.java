@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.exceptions.ItemNotFoundException;
+import com.example.demo.models.ReadFile;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
 import org.bson.types.ObjectId;
@@ -50,6 +51,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public List<User> getAllUsers() throws ItemNotFoundException {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/users/files")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<ReadFile> getUsersFiles() {
+        
     }
 
     @PutMapping("/users")

@@ -38,7 +38,7 @@ public class FileController {
 
     @GetMapping("/files/name")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<ReadFile> getAllFilesByName(@RequestParam("filename") String fileName){
+    public ReadFile getFileByName(@RequestParam("filename") String fileName){
         return fileService.findAllFilesByFileName(fileName);
     }
 
@@ -67,13 +67,12 @@ public class FileController {
 
     @PostMapping("/files/upload")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String uploadFile(@RequestParam("file") MultipartFile newFile, @RequestParam("spec") String specName, @RequestParam("user") String userName) throws IOException, ItemNotFoundException {
+    public List<String> uploadFile(@RequestParam("file") MultipartFile newFile, @RequestParam("spec") String specName, @RequestParam("user") String userName) throws IOException, ItemNotFoundException {
         InputStreamReader reader = new InputStreamReader(newFile.getInputStream());
         StringBuilder builder = new StringBuilder();
         while(reader.ready()) {
             builder.append((char)reader.read());
         }
-        System.out.println(builder.toString());
 
         File uploaded = new File("C://Users//BerkenNicholas//Documents//Revature training//FullProject//nick-full-project//nick-project//Project//Flatfiles//"+newFile.getOriginalFilename());
         FileWriter writer = new FileWriter(uploaded);
@@ -86,16 +85,20 @@ public class FileController {
         Map<String, Field> map = Parser.parseSpec(spec);
 
         String data = parser.readAllBytes(uploaded);
-        BsonDocument bison = parser.readStringFieldsBson(data, map);
+        List<String> bisons = parser.readStringFieldsBson(data, map);
 
-        ReadFile readFile = new ReadFile(newFile.getOriginalFilename(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bison.toString(), userName);
-
-        ReadFile newFileWId = fileService.createNewFile(readFile);
-
-        this.userService.updateFilesUploadedByUsername(userName, newFileWId.getId());
+        ReadFile readFile = new ReadFile(newFile.getOriginalFilename(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bisons, userName);
 
 
-        return bison.toString();
+        this.fileService.createNewFile(readFile);
+        ObjectId id = this.getFileByName(readFile.getFileName()).getId();
+
+        System.out.println(id);
+
+        this.userService.updateFilesUploadedByUsername(userName, id);
+
+
+        return bisons;
     }
 
     @DeleteMapping("/files")
