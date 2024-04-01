@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,5 +37,9 @@ public class SpecificationService {
 
     public List<Specification> findAllSpecsById(List<ObjectId> objectIds) {
         return specificationRepository.findAllById(objectIds);
+    }
+
+    public List<Specification> getAllSpecsById(ArrayList<ObjectId> specifications) {
+        return specificationRepository.findAllById(specifications);
     }
 }

@@ -2,7 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.exceptions.ItemNotFoundException;
 import com.example.demo.models.ReadFile;
+import com.example.demo.models.Specification;
 import com.example.demo.models.User;
+import com.example.demo.services.FileService;
+import com.example.demo.services.SpecificationService;
 import com.example.demo.services.UserService;
 import org.bson.types.ObjectId;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,10 +21,14 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+    private FileService fileService;
+    private SpecificationService specService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FileService fileService, SpecificationService specService) {
         this.userService = userService;
+        this.fileService = fileService;
+        this.specService = specService;
     }
 
     @GetMapping("/test")
@@ -55,8 +63,16 @@ public class UserController {
 
     @GetMapping("/users/files")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public List<ReadFile> getUsersFiles() {
-        
+    public List<ReadFile> getUsersFiles(@RequestParam("username") String username) throws ItemNotFoundException {
+        User ourUser = this.getUserByUsername(username);
+        return this.fileService.findAllFilesById(ourUser.getFilesUploaded());
+    }
+
+    @GetMapping("/users/specs")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public List<Specification> getUsersSpecs(@RequestParam("username") String username) throws ItemNotFoundException {
+        User ourUser = this.getUserByUsername(username);
+        return this.specService.getAllSpecsById(ourUser.getSpecifications());
     }
 
     @PutMapping("/users")
