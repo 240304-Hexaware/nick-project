@@ -4,10 +4,8 @@ package com.example.demo.models;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class User {
@@ -22,10 +20,10 @@ public class User {
     private String permissions;
 
     @Field(name = "files_uploaded")
-    private ArrayList<ObjectId> filesUploaded;
+    private List<ObjectId> filesUploaded;
 
     @Field(name = "specifications")
-    private ArrayList<ObjectId> specifications;
+    private List<ObjectId> specifications;
 
     public User(){
 
@@ -43,7 +41,7 @@ public class User {
         this.permissions = "user";
     }
 
-    public User( String username, String password, String permissions, ArrayList<ObjectId> filesUploaded, ArrayList<ObjectId> specifications) {
+    public User( String username, String password, String permissions, List<ObjectId> filesUploaded, List<ObjectId> specifications) {
         this.username = username;
         this.password = password;
         this.permissions = permissions;
@@ -51,19 +49,19 @@ public class User {
         this.specifications = specifications;
     }
 
-    public void setFilesUploaded(ArrayList<ObjectId> filesUploaded) {
+    public void setFilesUploaded(List<ObjectId> filesUploaded) {
         this.filesUploaded = filesUploaded;
     }
 
-    public ArrayList<ObjectId> getFilesUploaded() {
+    public List<ObjectId> getFilesUploaded() {
         return filesUploaded;
     }
 
-    public void setSpecifications(ArrayList<ObjectId> specifications) {
+    public void setSpecifications(List<ObjectId> specifications) {
         this.specifications = specifications;
     }
 
-    public ArrayList<ObjectId> getSpecifications() {
+    public List<ObjectId> getSpecifications() {
         return specifications;
     }
 

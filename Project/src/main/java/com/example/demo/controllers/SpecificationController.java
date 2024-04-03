@@ -46,7 +46,7 @@ public class SpecificationController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<Specification> getAllSpecsByIds(@RequestParam("ids") List<String> specIds){
 
-        List<ObjectId> objectIds = new ArrayList<ObjectId>();
+        List<ObjectId> objectIds = new ArrayList<>();
         for(String id : specIds){
             ObjectId curr = new ObjectId(id);
             objectIds.add(curr);

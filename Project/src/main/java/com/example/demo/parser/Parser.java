@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.BsonDocument;
 import org.bson.BsonString;
-import org.bson.json.JsonObject;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -48,7 +47,7 @@ public class Parser {
      * @return
      * @throws IOException
      */
-    public List<String> readStringFields(String data, Map<String, Field> spec) throws IOException {
+    public List<String> readStringFields(String data, Map<String, Field> spec) {
         List<String> fieldList = new ArrayList<>();
 
         Set<String> fields = spec.keySet();
@@ -61,14 +60,14 @@ public class Parser {
         return fieldList;
     }
 
-    public List<String> readStringFieldsBson(String data, Map<String, Field> spec) throws IOException {
+    public List<String> readStringFieldsBson(String data, Map<String, Field> spec) {
 
-        List<String> finalBson = new ArrayList<String>();
+        List<String> finalBson = new ArrayList<>();
         BsonDocument currBson = new BsonDocument();
 
         Set<String> fieldNames = spec.keySet();
         final int[] endPos = {0};
-        spec.values().forEach((field) -> {
+        spec.values().forEach(field -> {
             if(field.getEndPos() > endPos[0]){
                 endPos[0] = field.getEndPos();
             }
@@ -80,10 +79,12 @@ public class Parser {
             for(String fieldName : fieldNames){
                 Field field = spec.get(fieldName);
                 String fieldValue = data.substring(field.getStartPos()+(i* endPos[0]), field.getEndPos()+1+(i* endPos[0])).trim();
-
+                System.out.println(fieldName);
+                System.out.println(fieldValue);
                 currBson.put(fieldName, new BsonString(fieldValue));
             }
             System.out.println(currBson);
+            System.out.println(endPos);
             finalBson.add(currBson.toString());
             currBson.clear();
         }
@@ -104,9 +105,5 @@ public class Parser {
         System.out.println(map);
         return map;
     }
-
-
-
-
 
 }

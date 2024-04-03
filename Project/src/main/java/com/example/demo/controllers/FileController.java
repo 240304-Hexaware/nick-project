@@ -2,12 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.exceptions.ItemNotFoundException;
 import com.example.demo.models.ReadFile;
-import com.example.demo.models.User;
 import com.example.demo.parser.Field;
 import com.example.demo.parser.Parser;
 import com.example.demo.services.FileService;
 import com.example.demo.services.UserService;
-import org.bson.BsonDocument;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +43,7 @@ public class FileController {
     @GetMapping("/files/id")
     @ResponseStatus(HttpStatus.FOUND)
     public List<ReadFile> getAllFilesByIds(@RequestParam("ids") String[] fileIds){
-        List<ObjectId> objectIds = new ArrayList<ObjectId>();
+        List<ObjectId> objectIds = new ArrayList<>();
         for(String id : fileIds){
             ObjectId curr = new ObjectId(id);
             objectIds.add(curr);

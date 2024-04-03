@@ -1,0 +1,32 @@
+{
+	"number": {
+		"startPos": 0,
+		"endPos": 4,
+		"dataType": "String"
+	},
+	"streetName": {
+		"startPos": 5,
+		"endPos": 20,
+		"dataType": "String"
+	},
+	"city": {
+		"startPos": 21,
+		"endPos": 36,
+		"dataType": "String"
+	},
+	"state": {
+		"startPos": 37,
+		"endPos": 57,
+		"dataType": "String"
+	},
+	"country": {
+		"startPos": 58,
+		"endPos": 73,
+		"dataType": "String"
+	},
+	"continent": {
+		"startPos": 74,
+		"endPos": 99,
+		"dataType": "String"
+	}
+}

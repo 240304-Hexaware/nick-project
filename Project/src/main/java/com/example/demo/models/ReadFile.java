@@ -3,8 +3,6 @@ package com.example.demo.models;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Date;
 import java.util.List;
@@ -14,9 +12,6 @@ public class ReadFile {
 
     @Field(name = "_id")
     private ObjectId id;
-
-//    @Field(name = "metadata")
-//    private Metadata metadata;
 
     @Field(name = "file_name")
     private String fileName;

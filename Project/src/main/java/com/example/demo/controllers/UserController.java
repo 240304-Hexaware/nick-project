@@ -8,12 +8,10 @@ import com.example.demo.services.FileService;
 import com.example.demo.services.SpecificationService;
 import com.example.demo.services.UserService;
 import org.bson.types.ObjectId;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,7 +37,6 @@ public class UserController {
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public User postNewUser(@RequestBody User newUser) throws Exception{
-        System.out.println(newUser.getUsername());
         return userService.createNewUser(newUser);
     }
 

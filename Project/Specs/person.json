@@ -1,0 +1,17 @@
+{
+	"firstName": {
+		"startPos": 0,
+		"endPos": 15,
+		"dataType": "String"
+	},
+	"lastName": {
+		"startPos": 16,
+		"endPos": 31,
+		"dataType": "String"
+	},
+	"occupation": {
+		"startPos": 32,
+		"endPos": 52,
+		"dataType": "String"
+	}
+}
