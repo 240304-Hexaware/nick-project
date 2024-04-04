@@ -40,16 +40,16 @@ public class FileController {
         return fileService.findAllFilesByFileName(fileName);
     }
 
-    @GetMapping("/files/id")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<ReadFile> getAllFilesByIds(@RequestParam("ids") String[] fileIds){
-        List<ObjectId> objectIds = new ArrayList<>();
-        for(String id : fileIds){
-            ObjectId curr = new ObjectId(id);
-            objectIds.add(curr);
-        }
-        return fileService.findAllFilesById(objectIds);
-    }
+//    @GetMapping("/files/id")
+//    @ResponseStatus(HttpStatus.FOUND)
+//    public List<ReadFile> getAllFilesByIds(@RequestParam("ids") String[] fileIds){
+//        List<ObjectId> objectIds = new ArrayList<>();
+//        for(String id : fileIds){
+//            ObjectId curr = new ObjectId(id);
+//            objectIds.add(curr);
+//        }
+//        return fileService.findAllFilesById(objectIds);
+//    }
 
     @GetMapping("/files")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -87,14 +87,10 @@ public class FileController {
 
         ReadFile readFile = new ReadFile(newFile.getOriginalFilename(), specName, new Date(), uploaded.getTotalSpace(), uploaded.getPath(), bisons, userName);
 
-
         this.fileService.createNewFile(readFile);
         ObjectId id = this.getFileByName(readFile.getFileName()).getId();
 
-        System.out.println(id);
-
         this.userService.updateFilesUploadedByUsername(userName, id);
-
 
         return bisons;
     }

@@ -75,20 +75,18 @@ public class Parser {
 
         int dataCount = (data.length()-1) / endPos[0];
 
-        for(int i = 0; i < dataCount; i++){
+        for(int i = 0; i < dataCount; ++i){
             for(String fieldName : fieldNames){
                 Field field = spec.get(fieldName);
-                String fieldValue = data.substring(field.getStartPos()+(i* endPos[0]), field.getEndPos()+1+(i* endPos[0])).trim();
-                System.out.println(fieldName);
-                System.out.println(fieldValue);
+
+                String fieldValue = data.substring((field.getStartPos()+(i* endPos[0])), (field.getEndPos()+(1+(i* endPos[0])))).trim();
+
                 currBson.put(fieldName, new BsonString(fieldValue));
             }
-            System.out.println(currBson);
-            System.out.println(endPos);
+
             finalBson.add(currBson.toString());
             currBson.clear();
         }
-
 
         return finalBson;
     }

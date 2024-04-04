@@ -42,17 +42,17 @@ public class SpecificationController {
         return specificationService.getSpecByName(specName);
     }
 
-    @GetMapping("/spec/id")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Specification> getAllSpecsByIds(@RequestParam("ids") List<String> specIds){
-
-        List<ObjectId> objectIds = new ArrayList<>();
-        for(String id : specIds){
-            ObjectId curr = new ObjectId(id);
-            objectIds.add(curr);
-        }
-        return specificationService.findAllSpecsById(objectIds);
-    }
+//    @GetMapping("/spec/id")
+//    @ResponseStatus(HttpStatus.FOUND)
+//    public List<Specification> getAllSpecsByIds(@RequestParam("ids") List<String> specIds){
+//
+//        List<ObjectId> objectIds = new ArrayList<>();
+//        for(String id : specIds){
+//            ObjectId curr = new ObjectId(id);
+//            objectIds.add(curr);
+//        }
+//        return specificationService.findAllSpecsById(objectIds);
+//    }
 
     @PostMapping("/spec")
     @ResponseStatus(HttpStatus.ACCEPTED)
